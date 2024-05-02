@@ -54,7 +54,13 @@ function Login() {
         body: JSON.stringify(userData),
       });
       const data = await res.json();
-      dispatch(login({ token: data.data.token, username: username }));
+      dispatch(
+        login({
+          token: data.data.token,
+          username: username,
+          name: data.data.name,
+        })
+      );
       setName("");
       setUsername("");
       setPassword("");

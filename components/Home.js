@@ -1,9 +1,35 @@
 import Image from "next/image";
 import Tweets from "./Tweets";
-import { useState, useSelector } from "react";
+import { useState, useEffect } from "react";
 
 function Home() {
   const [tweetContent, setTweetContent] = useState("");
+  const [tweets, setTweets] = useState([]);
+
+  useEffect(() => {
+    const getTweets = async () => {
+      const res = await fetch("http://localhost:3000/tweets/");
+      const data = await res.json();
+      console.log(data);
+      setTweets(data.data);
+    };
+    getTweets();
+  }, []);
+
+  const displayTweets = tweets.map((data, index) => {
+    return (
+      <Tweets
+        key={index}
+        name={data.name}
+        username={data.username}
+        content={data.content}
+        likes={data.likes}
+        date={data.date}
+        id={data._id}
+        token={data.token}
+      />
+    );
+  });
 
   return (
     <div className="All w-screen h-screen overflow-hidden bg-[#151D26] flex">
@@ -32,25 +58,22 @@ function Home() {
               value={tweetContent}
               placeholder="What's up?"
               className="w-4/5 bg-transparent border-b border-gray-500 py-5 text-lg "
-              onChange={(e) => setTweetContent(e.target.value)}
+              onChange={(e) => {
+                tweetContent.length < 280
+                  ? setTweetContent(e.target.value)
+                  : setTweetContent(tweetContent); // Bugfix Needed
+              }}
             />
           </div>
           <div className="number-button flex justify-end items-center">
-            <p className="mr-5">{tweetContent.length}/260</p>
+            <p className="mr-5">{tweetContent.length}/280</p>
             <button className="bg-[#3790ED] rounded-full w-1/6 py-2 hover:bg-[#2D78C6]">
               Tweet
             </button>
           </div>
         </div>
         <div className="bottom-section overflow-auto h-full">
-          <Tweets />
-          <Tweets />
-          <Tweets />
-          <Tweets />
-          <Tweets />
-          <Tweets />
-          <Tweets />
-          <Tweets />
+          {displayTweets}
         </div>
       </div>
       <div className="right-column w-4/12 h-screen border-l border-gray-500 p-5 text-white">
