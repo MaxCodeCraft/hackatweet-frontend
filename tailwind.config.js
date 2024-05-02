@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        MontHeavy: ["MontHeavy", "serif"],
+        montheavy: ["MontHeavy", "sans-serif"],
       },
     },
   },

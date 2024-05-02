@@ -12,6 +12,5 @@
 
 @font-face {
   font-family: "MontHeavy";
-  src: local("MontHeavy"),
-    url("/hackatweet-frontend/fonts/MontHeavy.ttf") format("truetype");
+  src: url("../public/assets/MontHeavy.ttf") format("truetype");
 }

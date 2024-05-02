@@ -12,11 +12,11 @@ function Login() {
         <Image
           src="/twitterIcone180.png"
           alt="icone-Twitter"
-          width={300}
-          height={300}
+          width={400}
+          height={400}
         />
       </div>
-      <div className="Right-column flex flex-col pl-10 w-3/5 pt-8 bg-black text-white">
+      <div className="Right-column flex flex-col pl-10 w-3/5 pt-8 bg-black text-white ">
         <div className="Content-of-rigth w-1/2">
           <Image
             src="/twitterIcone180.png"
@@ -24,7 +24,7 @@ function Login() {
             width={50}
             height={50}
           />
-          <h1 className="text-7xl font-extrabold my-20 leading-normal ">
+          <h1 className="font-montheavy text-7xl font-extrabold my-20 leading-normal ">
             See what's happening
           </h1>
           <h2 className="text-3xl font-extrabold mb-5">
