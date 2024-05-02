@@ -9,3 +9,9 @@
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: "MontHeavy";
+  src: local("MontHeavy"),
+    url("/hackatweet-frontend/fonts/MontHeavy.ttf") format("truetype");
+}
