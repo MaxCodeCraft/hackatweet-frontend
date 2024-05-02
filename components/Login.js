@@ -29,7 +29,9 @@ function Login() {
         body: JSON.stringify(userData),
       });
       const data = await res.json();
-      dispatch(login({ token: data.data.token, username: username }));
+      dispatch(
+        login({ token: data.data.token, username: username, name: name })
+      );
       setName("");
       setUsername("");
       setPassword("");
@@ -148,6 +150,7 @@ function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
+                    type="password"
                     className="bg-transparent rounded border border-gray-500 p-2 "
                   ></input>
                   <button
@@ -188,6 +191,7 @@ function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
+                    type="password"
                     className="bg-transparent rounded border border-gray-500 p-2 "
                   ></input>
                   <button

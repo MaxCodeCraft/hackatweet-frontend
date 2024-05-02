@@ -2,10 +2,14 @@ import Image from "next/image";
 import Tweets from "./Tweets";
 import { useState, useEffect } from "react";
 import Trends from "./Trends";
+import { useSelector } from "react-redux";
 
 function Home() {
   const [tweetContent, setTweetContent] = useState("");
   const [tweets, setTweets] = useState([]);
+  const [toggle, setToggle] = useState(false);
+
+  const user = useSelector((state) => state.user.value);
 
   useEffect(() => {
     const getTweets = async () => {
@@ -17,7 +21,32 @@ function Home() {
     getTweets();
   }, []);
 
-  const displayTweets = tweets.map((data, index) => {
+  function handlePostTweet() {
+    const tweetData = {
+      name: user.name,
+      username: user.username,
+      content: tweetContent,
+      token: user.token,
+    };
+
+    const postTweet = async () => {
+      const res = await fetch("http://localhost:3000/tweets/new", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tweetData),
+      });
+      const response = await fetch("http://localhost:3000/tweets/");
+      const refreshData = await response.json();
+      setTweets(refreshData.data);
+    };
+    postTweet();
+    setTweetContent("");
+    setToggle(!toggle);
+  }
+
+  const displayTweets = tweets?.map((data, index) => {
     return (
       <Tweets
         key={index}
@@ -46,8 +75,8 @@ function Home() {
         <div className="icone-user flex pb-5">
           <Image src="/userIcone.png" alt="icone-user" width={50} height={50} />
           <div className="userInfo flex flex-col pl-5">
-            <p className="name text-lg text-white font-semibold">John</p>
-            <p className="username text-gray-400">@JohnCena</p>
+            <p className="name text-lg text-white font-semibold">{user.name}</p>
+            <p className="username text-gray-400">@{user.username}</p>
           </div>
         </div>
       </div>
@@ -68,12 +97,15 @@ function Home() {
           </div>
           <div className="number-button flex justify-end items-center">
             <p className="mr-5">{tweetContent.length}/280</p>
-            <button className="bg-[#3790ED] rounded-full w-1/6 py-2 hover:bg-[#2D78C6]">
+            <button
+              className="bg-[#3790ED] rounded-full w-1/6 py-2 hover:bg-[#2D78C6]"
+              onClick={() => handlePostTweet()}
+            >
               Tweet
             </button>
           </div>
         </div>
-        <div className="bottom-section overflow-auto h-full">
+        <div className="bottom-section overflow-auto h-[75vh]">
           {displayTweets}
         </div>
       </div>
