@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Tweets from "./Tweets";
 import { useState, useEffect } from "react";
+import Trends from "./Trends";
 
 function Home() {
   const [tweetContent, setTweetContent] = useState("");
@@ -44,14 +45,14 @@ function Home() {
         </div>
         <div className="icone-user flex pb-5">
           <Image src="/userIcone.png" alt="icone-user" width={50} height={50} />
-          <div className="userInfo flex flex-col">
+          <div className="userInfo flex flex-col pl-5">
             <p className="name text-lg text-white font-semibold">John</p>
             <p className="username text-gray-400">@JohnCena</p>
           </div>
         </div>
       </div>
       <div className="middle-column w-6/12 h-screen">
-        <div className="hight-part h-1/4 w-full  text-white p-5">
+        <div className="hight-part h-1/4 w-full  text-white p-5 mb-5 ">
           <h2 className=" text-3xl font-semibold">Home</h2>
           <div className="input flex justify-center items-center bg-transparent my-8">
             <input
@@ -77,7 +78,13 @@ function Home() {
         </div>
       </div>
       <div className="right-column w-4/12 h-screen border-l border-gray-500 p-5 text-white">
-        <h2 className="text-3xl font-semibold">Trends</h2>
+        <h2 className="text-3xl font-semibold mb-10">Trends</h2>
+
+        <Trends />
+        <Trends />
+        <Trends />
+        <Trends />
+        <Trends />
       </div>
     </div>
   );
