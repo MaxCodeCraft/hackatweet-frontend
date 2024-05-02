@@ -61,28 +61,45 @@ function Home() {
     );
   });
 
-  const [allHashtag, setAllHashtag] = useState([]);
+  const [allHashtags, setAllHashtags] = useState([]);
   useEffect(() => {
     const searchAllHashtag = async () => {
       const response = await fetch("http://localhost:3000/tweets/");
       const data = await response.json();
 
-      const newArr = [];
+      //Push all # in one array
+      const tempAllHashtags = [];
       data.data.forEach((data, i) => {
         if (data.hashtags.length > 0) {
-          console.log("data.hastags", data.hashtags);
-          newArr.push(...data.hashtags);
+          tempAllHashtags.push(...data.hashtags);
         }
       });
-      setAllHashtag(newArr);
+
+      //Create an object with the number of copy in the value
+      const objOfCopy = tempAllHashtags.reduce((previous, current) => {
+        previous[current] = (previous[current] || 0) + 1;
+        return previous;
+      }, {});
+
+      //Create one object for one # : easy to sort
+      const arrForOneHashtag = [];
+      for (const key in objOfCopy) {
+        arrForOneHashtag.push({ name: key, number: objOfCopy[key] });
+      }
+
+      const sortArr2 = arrForOneHashtag.sort(function (a, b) {
+        console.log(a);
+        return b.number - a.number;
+      });
+      setAllHashtags(sortArr2);
     };
 
     searchAllHashtag();
   }, []);
 
-  console.log("this is all hashtags", allHashtag);
-  allHashtag.forEach((data, i) => {
-    console.log(data);
+  const createTrends = allHashtags.map((data, i) => {
+    console.log("this is data", data);
+    return <Onetrend name={data.name} number={data.number} />;
   });
 
   return (
@@ -136,11 +153,7 @@ function Home() {
       <div className="right-column w-4/12 h-screen border-l border-gray-500 p-5 text-white">
         <h2 className="text-3xl font-semibold mb-10">Trends</h2>
 
-        <Onetrend />
-        <Onetrend />
-        <Onetrend />
-        <Onetrend />
-        <Onetrend />
+        {createTrends}
       </div>
     </div>
   );
