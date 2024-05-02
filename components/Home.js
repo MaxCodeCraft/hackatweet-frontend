@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Tweets from "./Tweets";
 import { useState, useEffect } from "react";
-import Trends from "./Trends";
 import { useSelector } from "react-redux";
+import Onetrend from "./Onetrend";
 
 function Home() {
   const [tweetContent, setTweetContent] = useState("");
@@ -112,11 +112,11 @@ function Home() {
       <div className="right-column w-4/12 h-screen border-l border-gray-500 p-5 text-white">
         <h2 className="text-3xl font-semibold mb-10">Trends</h2>
 
-        <Trends />
-        <Trends />
-        <Trends />
-        <Trends />
-        <Trends />
+        <Onetrend />
+        <Onetrend />
+        <Onetrend />
+        <Onetrend />
+        <Onetrend />
       </div>
     </div>
   );
