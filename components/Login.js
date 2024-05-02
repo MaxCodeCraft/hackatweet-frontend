@@ -1,10 +1,68 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState, useSelector } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../reducers/user";
 
 function Login() {
-  const [firstname, setFirstname] = useState("");
+  const router = useRouter();
+
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const handleSignUp = () => {
+    const userData = {
+      name: name,
+      username: username,
+      password: password,
+    };
+
+    const signUpUser = async () => {
+      const res = await fetch("http://localhost:3000/users/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+      const data = await res.json();
+      dispatch(login({ token: data.data.token, username: username }));
+      setName("");
+      setUsername("");
+      setPassword("");
+      router.push("/");
+    };
+
+    signUpUser();
+  };
+
+  const handleSignIn = () => {
+    const userData = {
+      username: username,
+      password: password,
+    };
+
+    const signInUser = async () => {
+      const res = await fetch("http://localhost:3000/users/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+      const data = await res.json();
+      dispatch(login({ token: data.data.token, username: username }));
+      setName("");
+      setUsername("");
+      setPassword("");
+      router.push("index");
+    };
+
+    signInUser();
+  };
 
   return (
     <div className="Main flex w-screen h-screen">
@@ -69,8 +127,8 @@ function Login() {
                 </p>
                 <div className="Inputs-button w-2/5 flex flex-col gap-3">
                   <input
-                    value={firstname}
-                    onChange={(e) => setFirstname(e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Firstname"
                     className="bg-transparent rounded border border-gray-500 p-2 "
                   ></input>
@@ -86,7 +144,10 @@ function Login() {
                     placeholder="Password"
                     className="bg-transparent rounded border border-gray-500 p-2 "
                   ></input>
-                  <button className="button-signUp bg-white hover:bg-gray-200 hover:duration-100 rounded-full px-3 py-2 my-2 w-full font-semibold text-black">
+                  <button
+                    className="button-signUp bg-white hover:bg-gray-200 hover:duration-100 rounded-full px-3 py-2 my-2 w-full font-semibold text-black"
+                    onClick={() => handleSignUp()}
+                  >
                     Sign up
                   </button>
                 </div>
@@ -123,7 +184,10 @@ function Login() {
                     placeholder="Password"
                     className="bg-transparent rounded border border-gray-500 p-2 "
                   ></input>
-                  <button className="button-signUp bg-white hover:bg-gray-200 hover:duration-100 rounded-full px-3 py-2 my-2 w-full font-semibold text-black">
+                  <button
+                    className="button-signIn bg-white hover:bg-gray-200 hover:duration-100 rounded-full px-3 py-2 my-2 w-full font-semibold text-black"
+                    onClick={() => handleSignIn()}
+                  >
                     Sign in
                   </button>
                 </div>
