@@ -18,7 +18,6 @@ function Tweets(props) {
   };
 
   const textWithHashtags = (text) => {
-    console.log(text.split(pattern));
     return text.split(pattern).map((part, index) => {
       if (part.match(pattern)) {
         return (
