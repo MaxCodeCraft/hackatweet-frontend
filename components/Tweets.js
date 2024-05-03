@@ -99,7 +99,17 @@ function Tweets(props) {
     <div className="main flex flex-col p-5 border-t border-gray-500">
       <div className="flex justify-between items-center">
         <div className="id-user flex items-center">
-          <Image src="/userIcone.png" alt="icone-user" width={50} height={50} />
+          {props.image ? (
+            <Image src={props.image} alt="icone-user" width={50} height={50} />
+          ) : (
+            <Image
+              src="/userIcone.png"
+              alt="icone-user"
+              width={50}
+              height={50}
+            />
+          )}
+
           <p className="username-data">
             <span className="text-white font-montheavy pl-2">{props.name}</span>
             <span className="pl-2 text-gray-400">@{props.username}</span>

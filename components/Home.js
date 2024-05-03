@@ -55,6 +55,7 @@ function Home() {
       content: tweetContent,
       token: user.token,
       hashtags: hashtags,
+      image: user.image,
     };
 
     const postTweet = async () => {
@@ -86,6 +87,7 @@ function Home() {
         date={data.date}
         id={data._id}
         token={data.token}
+        image={data.image}
         refreshDeletedTweet={refreshDeletedTweet}
       />
     );

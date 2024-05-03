@@ -1,35 +1,12 @@
 import Image from "next/image";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../reducers/user";
 import { useRouter } from "next/router";
 
 function UserInfo() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [image, setImage] = useState("");
   const user = useSelector((state) => state.user.value);
-
-  useEffect(() => {
-    const getImage = async () => {
-      const obj = {
-        username: user.username,
-      };
-      console.log(obj);
-      const response = await fetch(`http://localhost:3000/users/find`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(obj),
-      });
-      const data = await response.json();
-      setImage(data.data.image);
-    };
-    getImage();
-  }, []);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -40,8 +17,8 @@ function UserInfo() {
     <div className="pb-4">
       <div className="icone-user flex pb-5">
         <div className="avatar online">
-          {image ? (
-            <Image src={image} alt="icone-user" width={50} height={50} />
+          {user.image ? (
+            <Image src={user.image} alt="icone-user" width={50} height={50} />
           ) : (
             <Image
               src="/userIcone.png"

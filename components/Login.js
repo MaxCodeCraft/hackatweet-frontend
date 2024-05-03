@@ -36,7 +36,12 @@ function Login() {
       const data = await res.json();
       if (data.result) {
         dispatch(
-          login({ token: data.data.token, username: username, name: name })
+          login({
+            token: data.data.token,
+            username: username,
+            name: name,
+            image: data.data.image,
+          })
         );
         setName("");
         setUsername("");
@@ -68,6 +73,7 @@ function Login() {
           token: data.data.token,
           username: username,
           name: data.data.name,
+          image: data.data.image,
         })
       );
       setName("");

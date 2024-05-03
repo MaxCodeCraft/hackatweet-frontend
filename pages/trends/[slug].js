@@ -24,7 +24,7 @@ function Trends() {
     const getTweets = async () => {
       const res = await fetch(`http://localhost:3000/tweets/hashtags/${slug}`);
       const data = await res.json();
-      setTweets(data.data);
+      setTweets(data.data.reverse());
     };
     getTweets();
   }, [slug, toggle]);
@@ -37,7 +37,7 @@ function Trends() {
         );
         const data = await res.json();
 
-        setTweets(data.data);
+        setTweets(data.data.reverse());
       };
       getTweets();
     }
@@ -54,6 +54,7 @@ function Trends() {
         date={data.date}
         id={data._id}
         token={data.token}
+        image={data.image}
         refreshDeletedTweet={refreshDeletedTweet}
       />
     );
@@ -91,7 +92,7 @@ function Trends() {
             </div>
           </div>
         </div>
-        <div className="bottom-section overflow-auto h-full">
+        <div className="bottom-section overflow-auto h-[75vh]">
           {displayTweets}
         </div>
       </div>
