@@ -10,15 +10,12 @@ function UserInfo() {
   const router = useRouter();
   const dispatch = useDispatch();
   const [image, setImage] = useState("");
-  const username = useSelector((state) => state.user.value.username);
-  const name = useSelector((state) => state.user.value.name);
-  console.log("username", username);
+  const user = useSelector((state) => state.user.value);
 
   useEffect(() => {
     const getImage = async () => {
       const obj = {
-        username: username,
-        name: name,
+        username: user.username,
       };
       console.log(obj);
       const response = await fetch(`http://localhost:3000/users/find`, {
@@ -29,7 +26,6 @@ function UserInfo() {
         body: JSON.stringify(obj),
       });
       const data = await response.json();
-      console.log("chad", data);
       setImage(data.data.image);
     };
     getImage();
@@ -56,8 +52,8 @@ function UserInfo() {
           )}
         </div>
         <div className="userInfo flex flex-col pl-5">
-          <p className="name text-lg text-white font-semibold">{name}</p>
-          <p className="username text-gray-400">@{username}</p>
+          <p className="name text-lg text-white font-semibold">{user.name}</p>
+          <p className="username text-gray-400">@{user.username}</p>
         </div>
       </div>
       <button

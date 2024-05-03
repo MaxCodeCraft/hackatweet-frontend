@@ -104,34 +104,7 @@ function Home() {
             />
           </Link>
         </div>
-<<<<<<< HEAD
-        <div className="pb-4">
-          <div className="icone-user flex pb-5">
-            <div className="avatar online">
-              <Image
-                src="/userIcone.png"
-                alt="icone-user"
-                width={50}
-                height={50}
-              />
-            </div>
-            <div className="userInfo flex flex-col pl-5">
-              <p className="name text-lg text-white font-montheavy">
-                {user.name}
-              </p>
-              <p className="username text-gray-400">@{user.username}</p>
-            </div>
-          </div>
-          <button
-            className="px-4 bg-transparent border-gray-500 border rounded-full text-white font-semibold"
-            onClick={() => handleLogout()}
-          >
-            Logout
-          </button>
-        </div>
-=======
         <UserInfo />
->>>>>>> userImage
       </div>
       <div className="middle-column w-6/12 h-screen">
         <div className="hight-part h-1/4 w-full  text-white p-5 mb-5 ">
