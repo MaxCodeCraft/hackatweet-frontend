@@ -11,6 +11,10 @@ function Home() {
 
   const user = useSelector((state) => state.user.value);
 
+  const refreshDeletedTweet = () => {
+    setToggle(!toggle);
+  };
+
   useEffect(() => {
     const getTweets = async () => {
       const res = await fetch("http://localhost:3000/tweets/");
@@ -72,6 +76,7 @@ function Home() {
         date={data.date}
         id={data._id}
         token={data.token}
+        refreshDeletedTweet={refreshDeletedTweet}
       />
     );
   });
