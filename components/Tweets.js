@@ -20,10 +20,11 @@ function Tweets(props) {
   const handleLike = async () => {
     const res = await fetch(`http://localhost:3000/tweets/${props.id}`);
     const data = await res.json();
+
     const userToken = {
       token: user.token,
     };
-    console.log(data.data.likes);
+
     if (data.data.likes.includes(user.token)) {
       const resOk = await fetch(
         `http://localhost:3000/tweets/removelike/${props.id}`,
@@ -79,6 +80,21 @@ function Tweets(props) {
     ? (colorLike = "#f00")
     : (colorLike = "#fff");
 
+  const nowDate = new Date();
+  const tweetDate = new Date(props.date);
+  const lastTimeInMinute = Math.round((nowDate - tweetDate) / 60000);
+  const changeLastTime = () => {
+    let time;
+    if (lastTimeInMinute < 1) {
+      time = "a few seconds ago";
+    } else if (lastTimeInMinute >= 1) {
+      time = `${lastTimeInMinute} minutes`;
+    } else if (lastTimeInMinute >= 60) {
+      time = `${lastTimeInMinute / 60} hours`;
+    }
+    return time;
+  };
+
   return (
     <div className="main flex flex-col p-5 border-t border-gray-500">
       <div className="flex justify-between items-center">
@@ -87,6 +103,7 @@ function Tweets(props) {
           <p className="username-data">
             <span className="text-white pl-2">{props.name}</span>
             <span className="pl-2 text-gray-400">@{props.username}</span>
+            <span className="pl-2 text-gray-400">· {changeLastTime()}</span>
           </p>
         </div>
         {user.token === props.token ? (
