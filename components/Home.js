@@ -4,16 +4,27 @@ import Tweets from "./Tweets";
 import TopTrends from "./TopTrends";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { logout } from "../reducers/user";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 function Home() {
+  const router = useRouter();
   const [tweetContent, setTweetContent] = useState("");
   const [tweets, setTweets] = useState([]);
   const [toggle, setToggle] = useState(false);
 
   const user = useSelector((state) => state.user.value);
 
+  const dispatch = useDispatch();
+
   const refreshDeletedTweet = () => {
     setToggle(!toggle);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/");
   };
 
   useEffect(() => {
@@ -99,12 +110,29 @@ function Home() {
             />
           </Link>
         </div>
-        <div className="icone-user flex pb-5">
-          <Image src="/userIcone.png" alt="icone-user" width={50} height={50} />
-          <div className="userInfo flex flex-col pl-5">
-            <p className="name text-lg text-white font-semibold">{user.name}</p>
-            <p className="username text-gray-400">@{user.username}</p>
+        <div className="pb-4">
+          <div className="icone-user flex pb-5">
+            <div className="avatar online">
+              <Image
+                src="/userIcone.png"
+                alt="icone-user"
+                width={50}
+                height={50}
+              />
+            </div>
+            <div className="userInfo flex flex-col pl-5">
+              <p className="name text-lg text-white font-semibold">
+                {user.name}
+              </p>
+              <p className="username text-gray-400">@{user.username}</p>
+            </div>
           </div>
+          <button
+            className="px-4 bg-transparent border-gray-500 border rounded-full text-white font-semibold"
+            onClick={() => handleLogout()}
+          >
+            Logout
+          </button>
         </div>
       </div>
       <div className="middle-column w-6/12 h-screen">

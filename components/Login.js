@@ -66,7 +66,7 @@ function Login() {
       setName("");
       setUsername("");
       setPassword("");
-      router.push("index");
+      router.push("/");
     };
 
     signInUser();
