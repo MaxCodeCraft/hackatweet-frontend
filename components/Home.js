@@ -22,11 +22,26 @@ function Home() {
   }, []);
 
   function handlePostTweet() {
+    const pattern = /(#[\p{L}\d_]+)/gu;
+    const hashtags = [];
+
+    const extractHashtags = (text) => {
+      console.log(text.split(pattern));
+      return text.split(pattern).forEach((part) => {
+        if (part.match(pattern)) {
+          hashtags.push(part.toLowerCase());
+        }
+      });
+    };
+
+    extractHashtags(tweetContent);
+
     const tweetData = {
       name: user.name,
       username: user.username,
       content: tweetContent,
       token: user.token,
+      hashtags: hashtags.toString(),
     };
 
     const postTweet = async () => {
