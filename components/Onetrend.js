@@ -6,14 +6,15 @@ function OneTrend(props) {
   };
 
   return (
-    <div className="main bg-[#1B232C] py-4 px-6 rounded my-1">
-      <Link href={`/trends/${props.name}`}>
-        <h3 className="mb-2 font-semibold text-lg cursor-pointer">
+    <Link href={`/trends/${props.name}`}>
+      <div className="main bg-[#1B232C] hover:bg-[#232D3B] py-4 px-6 rounded my-1 cursor-pointer">
+        <h3 className="mb-2 font-semibold text-lg ">
           #{upperCaseFirstLetter(props.name)}
         </h3>
-      </Link>
-      <p className="text-gray-400">{props.number} Tweets</p>
-    </div>
+
+        <p className="text-gray-400">{props.number} Tweets</p>
+      </div>
+    </Link>
   );
 }
 

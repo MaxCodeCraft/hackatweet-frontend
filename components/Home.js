@@ -31,7 +31,8 @@ function Home() {
     const getTweets = async () => {
       const res = await fetch("http://localhost:3000/tweets/");
       const data = await res.json();
-      setTweets(data.data);
+
+      setTweets(data.data.reverse());
     };
     getTweets();
   }, [toggle]);
@@ -72,9 +73,10 @@ function Home() {
         },
         body: JSON.stringify(tweetData),
       });
-      const response = await fetch("http://localhost:3000/tweets/");
-      const refreshData = await response.json();
-      setTweets(refreshData.data);
+      // const response = await fetch("http://localhost:3000/tweets/");
+      // const refreshData = await response.json();
+
+      // setTweets(refreshData.data);
     };
     postTweet();
     setTweetContent("");
@@ -162,7 +164,7 @@ function Home() {
         </div>
       </div>
       <div className="right-column w-4/12 h-screen border-l border-gray-500 p-5 text-white overflow-auto">
-        <TopTrends />
+        <TopTrends toggle={toggle} />
       </div>
     </div>
   );
