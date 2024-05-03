@@ -19,7 +19,7 @@ function Home() {
       setTweets(data.data);
     };
     getTweets();
-  }, []);
+  }, [toggle]);
 
   function handlePostTweet() {
     const pattern = /(#[\p{L}\d_]+)/gu;
@@ -29,7 +29,7 @@ function Home() {
       console.log(text.split(pattern));
       return text.split(pattern).forEach((part) => {
         if (part.match(pattern)) {
-          hashtags.push(part.toLowerCase());
+          hashtags.push(part.slice(1).toLowerCase());
         }
       });
     };
@@ -118,7 +118,7 @@ function Home() {
     };
 
     searchAllHashtag();
-  }, []);
+  }, [toggle]);
 
   const createTrends = allHashtags.map((data, i) => {
     return <Onetrend name={data.name} number={data.number} />;
