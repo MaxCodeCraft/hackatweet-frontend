@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Onetrend from "./Onetrend";
 
-function TopTrends() {
+function TopTrends(props) {
   const [allHashtags, setAllHashtags] = useState([]);
   useEffect(() => {
     const searchAllHashtag = async () => {
@@ -40,10 +40,12 @@ function TopTrends() {
     };
 
     searchAllHashtag();
-  }, []);
+  }, [props.toggle]);
 
   const createTrends = allHashtags.map((data, i) => {
-    return <Onetrend name={data.name} number={data.number} />;
+    if (i < 5) {
+      return <Onetrend name={data.name} number={data.number} />;
+    }
   });
 
   return (

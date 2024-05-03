@@ -10,6 +10,11 @@ function Trends() {
   const { slug } = router.query;
   const [hashtagSearch, setHashtagSearch] = useState("");
   const [tweets, setTweets] = useState([]);
+  const [toggle, setToggle] = useState(true);
+
+  const refreshDeletedTweet = () => {
+    setToggle(!toggle);
+  };
 
   useEffect(() => {
     const getTweets = async () => {
@@ -18,7 +23,7 @@ function Trends() {
       setTweets(data.data);
     };
     getTweets();
-  }, [slug]);
+  }, [slug, toggle]);
 
   useEffect(() => {
     if (hashtagSearch) {
@@ -32,7 +37,7 @@ function Trends() {
       };
       getTweets();
     }
-  }, [hashtagSearch]);
+  }, [hashtagSearch, toggle]);
 
   const displayTweets = tweets.map((data, index) => {
     return (
@@ -45,6 +50,7 @@ function Trends() {
         date={data.date}
         id={data._id}
         token={data.token}
+        refreshDeletedTweet={refreshDeletedTweet}
       />
     );
   });
