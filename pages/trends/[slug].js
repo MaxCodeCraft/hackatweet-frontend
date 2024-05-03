@@ -8,7 +8,7 @@ import TopTrends from "../../components/TopTrends";
 function Trends() {
   const router = useRouter();
   const { slug } = router.query;
-  const [hashtagSearch, setHashtagSearch] = useState("#");
+  const [hashtagSearch, setHashtagSearch] = useState("");
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
