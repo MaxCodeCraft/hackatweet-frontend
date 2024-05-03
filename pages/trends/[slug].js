@@ -1,17 +1,21 @@
 import Image from "next/image";
 import Tweets from "../../components/Tweets";
 import { useState, useEffect } from "react";
-import Onetrend from "../../components/Onetrend";
+import { useRouter } from "next/router";
+import TopTrends from "../../components/TopTrends";
 
 function Trends() {
+  const router = useRouter();
   const [hashtagSearch, setHashtagSearch] = useState("");
   const [tweets, setTweets] = useState([]);
+  const { slug } = router.query;
 
   useEffect(() => {
+    console.log("this is slug", slug);
     const getTweets = async () => {
-      const res = await fetch(`http://localho3000/hashtags/${props.name}`);
+      const res = await fetch(`http://localhost:3000/hashtags/${slug}`);
       const data = await res.json();
-      console.log(data);
+      console.log("thisi is data", data);
       setTweets(data.data);
     };
     getTweets();
@@ -70,13 +74,7 @@ function Trends() {
         </div>
       </div>
       <div className="right-column w-4/12 h-screen border-l border-gray-500 p-5 text-white">
-        <h2 className="text-3xl font-semibold mb-10">Trends</h2>
-
-        <Onetrend />
-        <Onetrend />
-        <Onetrend />
-        <Onetrend />
-        <Onetrend />
+        <TopTrends />
       </div>
     </div>
   );

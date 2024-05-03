@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Tweets from "./Tweets";
+import TopTrends from "./TopTrends";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import Onetrend from "./Onetrend";
 
 function Home() {
   const [tweetContent, setTweetContent] = useState("");
@@ -76,54 +76,6 @@ function Home() {
     );
   });
 
-  const [allHashtags, setAllHashtags] = useState([]);
-  useEffect(() => {
-    const searchAllHashtag = async () => {
-      const response = await fetch("http://localhost:3000/tweets/");
-      const data = await response.json();
-
-      console.log("this is newData", data);
-
-      //Push all # in one array
-      const tempAllHashtags = [];
-      data.data.forEach((data, i) => {
-        if (data.hashtags.length > 0) {
-          console.log("data.hashtags", data.hashtags);
-
-          tempAllHashtags.push(...data.hashtags);
-        }
-      });
-
-      const arrTest = [];
-      tempAllHashtags.forEach((data, i) => {
-        return arrTest.push(...data.split(","));
-      });
-
-      //Create an object with the number of copy in the value
-      const objOfCopy = arrTest.reduce((previous, current) => {
-        previous[current] = (previous[current] || 0) + 1;
-        return previous;
-      }, {});
-
-      //Create one object for one # : easy to sort
-      const arrForOneHashtag = [];
-      for (const key in objOfCopy) {
-        arrForOneHashtag.push({ name: key, number: objOfCopy[key] });
-      }
-
-      const sortArr2 = arrForOneHashtag.sort(function (a, b) {
-        return b.number - a.number;
-      });
-      setAllHashtags(sortArr2);
-    };
-
-    searchAllHashtag();
-  }, [toggle]);
-
-  const createTrends = allHashtags.map((data, i) => {
-    return <Onetrend name={data.name} number={data.number} />;
-  });
-
   return (
     <div className="All w-screen h-screen overflow-hidden bg-[#151D26] flex">
       <div className="left-column flex flex-col justify-between w-3/12 h-screen border-r border-gray-500 pl-10 pt-5">
@@ -172,10 +124,8 @@ function Home() {
           {displayTweets}
         </div>
       </div>
-      <div className="right-column w-4/12 h-screen border-l border-gray-500 p-5 text-white">
-        <h2 className="text-3xl font-semibold mb-10">Trends</h2>
-
-        {createTrends}
+      <div className="right-column w-4/12 h-screen border-l border-gray-500 p-5 text-white overflow-y-auto">
+        <TopTrends />
       </div>
     </div>
   );
