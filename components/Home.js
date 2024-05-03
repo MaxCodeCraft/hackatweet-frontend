@@ -67,16 +67,25 @@ function Home() {
       const response = await fetch("http://localhost:3000/tweets/");
       const data = await response.json();
 
+      console.log("this is newData", data);
+
       //Push all # in one array
       const tempAllHashtags = [];
       data.data.forEach((data, i) => {
         if (data.hashtags.length > 0) {
+          console.log("data.hashtags", data.hashtags);
+
           tempAllHashtags.push(...data.hashtags);
         }
       });
 
+      const arrTest = [];
+      tempAllHashtags.forEach((data, i) => {
+        return arrTest.push(...data.split(","));
+      });
+
       //Create an object with the number of copy in the value
-      const objOfCopy = tempAllHashtags.reduce((previous, current) => {
+      const objOfCopy = arrTest.reduce((previous, current) => {
         previous[current] = (previous[current] || 0) + 1;
         return previous;
       }, {});
@@ -88,7 +97,6 @@ function Home() {
       }
 
       const sortArr2 = arrForOneHashtag.sort(function (a, b) {
-        console.log(a);
         return b.number - a.number;
       });
       setAllHashtags(sortArr2);
@@ -98,7 +106,6 @@ function Home() {
   }, []);
 
   const createTrends = allHashtags.map((data, i) => {
-    console.log("this is data", data);
     return <Onetrend name={data.name} number={data.number} />;
   });
 
