@@ -7,20 +7,32 @@ import TopTrends from "../../components/TopTrends";
 
 function Trends() {
   const router = useRouter();
-  const [hashtagSearch, setHashtagSearch] = useState("");
-  const [tweets, setTweets] = useState([]);
   const { slug } = router.query;
+  const [hashtagSearch, setHashtagSearch] = useState("#");
+  const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
-    console.log("this is slug", slug);
     const getTweets = async () => {
-      const res = await fetch(`http://localhost:3000/hashtags/${slug}`);
+      const res = await fetch(`http://localhost:3000/tweets/hashtags/${slug}`);
       const data = await res.json();
-      console.log("thisi is data", data);
       setTweets(data.data);
     };
     getTweets();
-  }, []);
+  }, [slug]);
+
+  useEffect(() => {
+    if (hashtagSearch) {
+      const getTweets = async () => {
+        const res = await fetch(
+          `http://localhost:3000/tweets/hashtags/${hashtagSearch}`
+        );
+        const data = await res.json();
+
+        setTweets(data.data);
+      };
+      getTweets();
+    }
+  }, [hashtagSearch]);
 
   const displayTweets = tweets.map((data, index) => {
     return (
@@ -62,14 +74,17 @@ function Trends() {
         <div className="hight-part h-1/4 w-full  text-white p-5 mb-5 ">
           <h2 className=" text-3xl font-semibold">Hashtag</h2>
           <div className="input flex justify-center items-center bg-transparent my-8">
-            <input
-              value={hashtagSearch}
-              placeholder={"test"}
-              className="w-4/5 bg-transparent border-b border-gray-500 py-5 text-lg "
-              onChange={(e) => {
-                setTweetContent(tweetContent);
-              }}
-            />
+            <div className="bg-[#1B232C] rounded-full w-5/6 p-3">
+              <span className="pr-1">#</span>
+              <input
+                defaultValue={slug}
+                key={slug}
+                className="w-4/5 bg-transparent text-lg "
+                onChange={(e) => {
+                  setHashtagSearch(e.target.value);
+                }}
+              />
+            </div>
           </div>
         </div>
         <div className="bottom-section overflow-auto h-full">
