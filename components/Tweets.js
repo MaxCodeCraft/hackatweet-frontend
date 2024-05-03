@@ -82,15 +82,15 @@ function Tweets(props) {
 
   const nowDate = new Date();
   const tweetDate = new Date(props.date);
-  const lastTimeInMinute = Math.round((nowDate - tweetDate) / 60000);
+  const lastTimeInMinute = Math.floor((nowDate - tweetDate) / 60000);
   const changeLastTime = () => {
     let time;
     if (lastTimeInMinute < 1) {
       time = "a few seconds ago";
-    } else if (lastTimeInMinute >= 1) {
+    } else if (lastTimeInMinute >= 1 && lastTimeInMinute < 60) {
       time = `${lastTimeInMinute} minutes`;
-    } else if (lastTimeInMinute >= 60) {
-      time = `${lastTimeInMinute / 60} hours`;
+    } else {
+      time = `${Math.floor(lastTimeInMinute / 60)} hours`;
     }
     return time;
   };

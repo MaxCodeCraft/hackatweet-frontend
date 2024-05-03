@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import TopTrends from "../../components/TopTrends";
+import UserInfo from "../../components/UserInfo";
 
 function Trends() {
   const router = useRouter();
@@ -71,28 +72,7 @@ function Trends() {
             />
           </Link>
         </div>
-        <div className="pb-4">
-          <div className="icone-user flex pb-5">
-            <Image
-              src="/userIcone.png"
-              alt="icone-user"
-              width={50}
-              height={50}
-            />
-            <div className="userInfo flex flex-col pl-5">
-              <p className="name text-lg text-white font-semibold">
-                {user.name}
-              </p>
-              <p className="username text-gray-400">@{user.username}</p>
-            </div>
-          </div>
-          <button
-            className="px-4 bg-transparent border-gray-500 border rounded-full text-white font-semibold"
-            onClick={() => handleLogout()}
-          >
-            Logout
-          </button>
-        </div>
+        <UserInfo />
       </div>
       <div className="middle-column w-6/12 h-screen">
         <div className="hight-part h-1/4 w-full  text-white p-5 mb-5 ">

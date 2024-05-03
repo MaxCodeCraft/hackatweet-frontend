@@ -2,14 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import Tweets from "./Tweets";
 import TopTrends from "./TopTrends";
+import UserInfo from "./UserInfo";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { logout } from "../reducers/user";
 import { useDispatch } from "react-redux";
-import { useRouter } from "next/router";
 
 function Home() {
-  const router = useRouter();
   const [tweetContent, setTweetContent] = useState("");
   const [tweets, setTweets] = useState([]);
   const [toggle, setToggle] = useState(false);
@@ -22,16 +20,10 @@ function Home() {
     setToggle(!toggle);
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
-    router.push("/");
-  };
-
   useEffect(() => {
     const getTweets = async () => {
       const res = await fetch("http://localhost:3000/tweets/");
       const data = await res.json();
-
       setTweets(data.data.reverse());
     };
     getTweets();
@@ -112,30 +104,7 @@ function Home() {
             />
           </Link>
         </div>
-        <div className="pb-4">
-          <div className="icone-user flex pb-5">
-            <div className="avatar online">
-              <Image
-                src="/userIcone.png"
-                alt="icone-user"
-                width={50}
-                height={50}
-              />
-            </div>
-            <div className="userInfo flex flex-col pl-5">
-              <p className="name text-lg text-white font-semibold">
-                {user.name}
-              </p>
-              <p className="username text-gray-400">@{user.username}</p>
-            </div>
-          </div>
-          <button
-            className="px-4 bg-transparent border-gray-500 border rounded-full text-white font-semibold"
-            onClick={() => handleLogout()}
-          >
-            Logout
-          </button>
-        </div>
+        <UserInfo />
       </div>
       <div className="middle-column w-6/12 h-screen">
         <div className="hight-part h-1/4 w-full  text-white p-5 mb-5 ">
