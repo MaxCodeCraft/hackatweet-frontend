@@ -123,7 +123,7 @@ function Home() {
               />
             </div>
             <div className="userInfo flex flex-col pl-5">
-              <p className="name text-lg text-white font-semibold">
+              <p className="name text-lg text-white font-montheavy">
                 {user.name}
               </p>
               <p className="username text-gray-400">@{user.username}</p>
