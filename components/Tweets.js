@@ -40,7 +40,6 @@ function Tweets(props) {
     });
     const data = await res.json();
     deleteTweet();
-    console.log(data);
   };
 
   return (
