@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Tweets from "../../components/Tweets";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -39,13 +40,15 @@ function Trends() {
   return (
     <div className="All w-screen h-screen overflow-hidden bg-[#151D26] flex">
       <div className="left-column flex flex-col justify-between w-3/12 h-screen border-r border-gray-500 pl-10 pt-5">
-        <div>
-          <Image
-            src="/twitterIcone180.png"
-            alt="icone-Twitter"
-            width={50}
-            height={50}
-          />{" "}
+        <div className="cursor-pointer">
+          <Link href="/">
+            <Image
+              src="/twitterIcone180.png"
+              alt="icone-Twitter"
+              width={50}
+              height={50}
+            />
+          </Link>
         </div>
         <div className="icone-user flex pb-5">
           <Image src="/userIcone.png" alt="icone-user" width={50} height={50} />

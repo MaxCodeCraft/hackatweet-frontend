@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Tweets from "./Tweets";
 import TopTrends from "./TopTrends";
 import { useState, useEffect } from "react";
@@ -33,7 +34,13 @@ function Home() {
       console.log(text.split(pattern));
       return text.split(pattern).forEach((part) => {
         if (part.match(pattern)) {
-          hashtags.push(part.slice(1).toLowerCase());
+          hashtags.push(
+            part
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .slice(1)
+              .toLowerCase()
+          );
         }
       });
     };
@@ -84,13 +91,15 @@ function Home() {
   return (
     <div className="All w-screen h-screen overflow-hidden bg-[#151D26] flex">
       <div className="left-column flex flex-col justify-between w-3/12 h-screen border-r border-gray-500 pl-10 pt-5">
-        <div>
-          <Image
-            src="/twitterIcone180.png"
-            alt="icone-Twitter"
-            width={50}
-            height={50}
-          />{" "}
+        <div className="cursor-pointer">
+          <Link href="/">
+            <Image
+              src="/twitterIcone180.png"
+              alt="icone-Twitter"
+              width={50}
+              height={50}
+            />
+          </Link>
         </div>
         <div className="icone-user flex pb-5">
           <Image src="/userIcone.png" alt="icone-user" width={50} height={50} />
@@ -108,11 +117,8 @@ function Home() {
               value={tweetContent}
               placeholder="What's up?"
               className="w-4/5 bg-transparent border-b border-gray-500 py-5 text-lg "
-              onChange={(e) => {
-                tweetContent.length < 280
-                  ? setTweetContent(e.target.value)
-                  : setTweetContent(tweetContent); // Bugfix Needed
-              }}
+              maxlength="280"
+              onChange={(e) => setTweetContent(e.target.value)}
             />
           </div>
           <div className="number-button flex justify-end items-center">
@@ -129,7 +135,7 @@ function Home() {
           {displayTweets}
         </div>
       </div>
-      <div className="right-column w-4/12 h-screen border-l border-gray-500 p-5 text-white overflow-y-auto">
+      <div className="right-column w-4/12 h-screen border-l border-gray-500 p-5 text-white overflow-auto">
         <TopTrends />
       </div>
     </div>
