@@ -54,7 +54,7 @@ function Tweets(props) {
     return text.split(pattern).map((part, index) => {
       if (part.match(pattern)) {
         return (
-          <Link key={index} href={`/trends/${part.slice(1)}`}>
+          <Link key={index} href={`/trends/${part.slice(1).toLowerCase()}`}>
             <span className="font-extrabord cursor-pointer text-blue-600">
               {part}
             </span>

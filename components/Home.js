@@ -30,9 +30,8 @@ function Home() {
     const hashtags = [];
 
     const extractHashtags = (text) => {
-      console.log(text.split(pattern));
       return text.split(pattern).forEach((part) => {
-        if (part.match(pattern)) {
+        if (part.match(pattern) && part.length > 2) {
           hashtags.push(
             part
               .normalize("NFD")
@@ -51,7 +50,7 @@ function Home() {
       username: user.username,
       content: tweetContent,
       token: user.token,
-      hashtags: hashtags.toString(),
+      hashtags: hashtags,
     };
 
     const postTweet = async () => {
