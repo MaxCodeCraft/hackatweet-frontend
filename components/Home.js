@@ -20,7 +20,6 @@ function Home() {
     const getTweets = async () => {
       const res = await fetch("http://localhost:3000/tweets/");
       const data = await res.json();
-      console.log(data);
       setTweets(data.data);
     };
     getTweets();

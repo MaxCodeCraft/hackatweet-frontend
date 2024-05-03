@@ -17,8 +17,40 @@ function Tweets(props) {
     props.refreshDeletedTweet();
   };
 
+  const handleLike = async () => {
+    const res = await fetch(`http://localhost:3000/tweets/${props.id}`);
+    const data = await res.json();
+    const userToken = {
+      token: user.token,
+    };
+    console.log(data.data.likes);
+    if (data.data.likes.includes(user.token)) {
+      const resOk = await fetch(
+        `http://localhost:3000/tweets/removelike/${props.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userToken),
+        }
+      );
+    } else {
+      const resNotOk = await fetch(
+        `http://localhost:3000/tweets/addlike/${props.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userToken),
+        }
+      );
+    }
+    deleteTweet();
+  };
+
   const textWithHashtags = (text) => {
-    console.log(text.split(pattern));
     return text.split(pattern).map((part, index) => {
       if (part.match(pattern)) {
         return (
@@ -41,6 +73,11 @@ function Tweets(props) {
     const data = await res.json();
     deleteTweet();
   };
+
+  let colorLike = "";
+  props.likes.includes(user.token)
+    ? (colorLike = "#f00")
+    : (colorLike = "#fff");
 
   return (
     <div className="main flex flex-col p-5 border-t border-gray-500">
@@ -68,8 +105,12 @@ function Tweets(props) {
         {textWithHashtags(text)}
       </div>
       <div className="likes flex items-center gap-5">
-        <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff" }} />
-        <p className="text-white">{likes.length}</p>
+        <FontAwesomeIcon
+          icon={faHeart}
+          style={{ color: `${colorLike}`, cursor: "pointer" }}
+          onClick={() => handleLike()}
+        />
+        <p style={{ color: `${colorLike}` }}>{likes.length}</p>
       </div>
     </div>
   );
