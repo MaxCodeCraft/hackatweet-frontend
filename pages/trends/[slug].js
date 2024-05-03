@@ -57,7 +57,7 @@ function Trends() {
           <div className="input flex justify-center items-center bg-transparent my-8">
             <input
               value={hashtagSearch}
-              placeholder={props.name}
+              placeholder={"test"}
               className="w-4/5 bg-transparent border-b border-gray-500 py-5 text-lg "
               onChange={(e) => {
                 setTweetContent(tweetContent);
