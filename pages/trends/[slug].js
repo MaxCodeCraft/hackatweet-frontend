@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import TopTrends from "../../components/TopTrends";
+import UserInfo from "../../components/UserInfo";
 
 function Trends() {
   const router = useRouter();
@@ -71,6 +72,7 @@ function Trends() {
             />
           </Link>
         </div>
+<<<<<<< HEAD
         <div className="pb-4">
           <div className="icone-user flex pb-5">
             <Image
@@ -93,6 +95,9 @@ function Trends() {
             Logout
           </button>
         </div>
+=======
+        <UserInfo />
+>>>>>>> userImage
       </div>
       <div className="middle-column w-6/12 h-screen">
         <div className="hight-part h-1/4 w-full  text-white p-5 mb-5 ">
