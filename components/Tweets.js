@@ -77,7 +77,7 @@ function Tweets(props) {
 
   let colorLike = "";
   props.likes.includes(user.token)
-    ? (colorLike = "#f00")
+    ? (colorLike = "#26ff49")
     : (colorLike = "#fff");
 
   const nowDate = new Date();
@@ -96,7 +96,7 @@ function Tweets(props) {
   };
 
   return (
-    <div className="main flex flex-col p-5 border-t border-gray-500">
+    <div className="main flex flex-col p-5 border-2 border-[#26ff49]/10 rounded-lg shadow-inner">
       <div className="flex justify-between items-center">
         <div className="id-user flex items-center">
           {props.image ? (

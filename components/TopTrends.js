@@ -50,8 +50,14 @@ function TopTrends(props) {
 
   return (
     <>
-      <h2 className="text-3xl font-semibold mb-10">Trends</h2>
-      <div>{createTrends}</div>
+      <h2 className="font-cannet text-3xl font-semibold mb-10">Trends</h2>
+      {createTrends ? (
+        <div>{createTrends}</div>
+      ) : (
+        <div className="w-full h-96 flex justify-center items-center">
+          <span className="loading loading-bars loading-lg"></span>
+        </div>
+      )}
     </>
   );
 }

@@ -13,6 +13,11 @@ module.exports = {
     extend: {
       fontFamily: {
         montheavy: ["MontHeavy", "sans-serif"],
+        cannet: ["CannetAgency", "sans-serif"],
+        goblin: ["GlitchGoblin", "sans-serif"],
+      },
+      boxShadow: {
+        inner: "inset rgba(38, 255, 73, 0.1) 0px 0px 30px -12px",
       },
     },
   },
