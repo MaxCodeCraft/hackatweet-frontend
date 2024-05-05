@@ -27,13 +27,16 @@ function Login() {
     };
 
     const signUpUser = async () => {
-      const res = await fetch("http://localhost:3000/users/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+      const res = await fetch(
+        "https://zweeper-backend.vercel.app/users/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
       const data = await res.json();
       if (data.result) {
         dispatch(
@@ -61,13 +64,16 @@ function Login() {
     };
 
     const signInUser = async () => {
-      const res = await fetch("http://localhost:3000/users/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+      const res = await fetch(
+        "https://zweeper-backend.vercel.app/users/signin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
       const data = await res.json();
       dispatch(
         login({

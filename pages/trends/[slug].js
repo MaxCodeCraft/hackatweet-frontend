@@ -23,7 +23,9 @@ function Trends() {
 
   useEffect(() => {
     const getTweets = async () => {
-      const res = await fetch(`http://localhost:3000/tweets/hashtags/${slug}`);
+      const res = await fetch(
+        `https://zweeper-backend.vercel.app/tweets/hashtags/${slug}`
+      );
       const data = await res.json();
       setTweets(data.data.reverse());
     };
@@ -34,7 +36,7 @@ function Trends() {
     if (hashtagSearch) {
       const getTweets = async () => {
         const res = await fetch(
-          `http://localhost:3000/tweets/hashtags/${hashtagSearch}`
+          `https://zweeper-backend.vercel.app/tweets/hashtags/${hashtagSearch}`
         );
         const data = await res.json();
 

@@ -18,7 +18,9 @@ function Tweets(props) {
   };
 
   const handleLike = async () => {
-    const res = await fetch(`http://localhost:3000/tweets/${props.id}`);
+    const res = await fetch(
+      `https://zweeper-backend.vercel.app/tweets/${props.id}`
+    );
     const data = await res.json();
 
     const userToken = {
@@ -27,7 +29,7 @@ function Tweets(props) {
 
     if (data.data.likes.includes(user.token)) {
       const resOk = await fetch(
-        `http://localhost:3000/tweets/removelike/${props.id}`,
+        `https://zweeper-backend.vercel.app/tweets/removelike/${props.id}`,
         {
           method: "PUT",
           headers: {
@@ -38,7 +40,7 @@ function Tweets(props) {
       );
     } else {
       const resNotOk = await fetch(
-        `http://localhost:3000/tweets/addlike/${props.id}`,
+        `https://zweeper-backend.vercel.app/tweets/addlike/${props.id}`,
         {
           method: "PUT",
           headers: {
@@ -68,9 +70,12 @@ function Tweets(props) {
   };
 
   const handleDeleteTweet = async () => {
-    const res = await fetch(`http://localhost:3000/tweets/delete/${props.id}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `https://zweeper-backend.vercel.app/tweets/delete/${props.id}`,
+      {
+        method: "DELETE",
+      }
+    );
     const data = await res.json();
     deleteTweet();
   };

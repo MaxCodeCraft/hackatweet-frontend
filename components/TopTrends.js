@@ -5,7 +5,7 @@ function TopTrends(props) {
   const [allHashtags, setAllHashtags] = useState([]);
   useEffect(() => {
     const searchAllHashtag = async () => {
-      const response = await fetch("http://localhost:3000/tweets");
+      const response = await fetch("https://zweeper-backend.vercel.app/tweets");
       const data = await response.json();
 
       //Push all # in one array

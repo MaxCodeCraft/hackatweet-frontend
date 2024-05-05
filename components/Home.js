@@ -23,7 +23,7 @@ function Home() {
 
   useEffect(() => {
     const getTweets = async () => {
-      const res = await fetch("http://localhost:3000/tweets/");
+      const res = await fetch("https://zweeper-backend.vercel.app/tweets/");
       const data = await res.json();
       setTweets(data.data.reverse());
     };
@@ -60,7 +60,7 @@ function Home() {
     };
 
     const postTweet = async () => {
-      const res = await fetch("http://localhost:3000/tweets/new", {
+      const res = await fetch("https://zweeper-backend.vercel.app/tweets/new", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
