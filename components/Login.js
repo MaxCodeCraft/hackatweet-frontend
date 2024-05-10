@@ -93,7 +93,7 @@ function Login() {
   };
 
   return (
-    <div className="Main flex w-screen h-screen">
+    <div className="Main flex flex-col w-screen h-screen md:flex-row ">
       {coockies ? (
         <></>
       ) : (
@@ -126,8 +126,9 @@ function Login() {
           </div>
         </div>
       )}
-      <div className="Left-column flex justify-center items-center w-2/5 bg-[url('/bg-cybercity.jpg')] bg-cover">
+      <div className="Left-column flex justify-center items-center w-full h-1/6 md:h-full md:w-2/5 bg-[url('/bg-cybercity.jpg')] bg-cover">
         <svg
+          className="top-image absolute w-1/3 h-1/3 mt-[100px] min-[664px]:w-1/4 md:w-5/6 md:h-full md:static md:mt-0 xl:w-1/2 xl:h-1/2"
           fill="#26ff49"
           width="400px"
           height="400px"
@@ -166,9 +167,10 @@ function Login() {
           </g>
         </svg>
       </div>
-      <div className="Right-column flex flex-col pl-10 w-3/5 pt-8 bg-black text-white ">
-        <div className="Content-of-rigth w-1/2">
+      <div className="Right-column flex flex-col max-[767px]:items-center md:px-10 lg:pl-10  h-full xl:w-3/5 pt-8 bg-black text-white ">
+        <div className="Content-of-rigth max-[767px]:w-3/4  lg:w-3/5  md:flex md:flex-col md:items-center lg:items-start">
           <svg
+            className="hidden md:block"
             fill="#26ff49"
             width="50px"
             height="50px"
@@ -195,25 +197,28 @@ function Login() {
             <path d="M2.679 20.63h1.461l0.327 0.957-1.014 0.476-0.774-1.080z"></path>
             <path d="M29.304 20.63v0.679l-0.696 0.754-1.032-0.447 0.235-0.974z"></path>
           </svg>
-          <h1 className="font-cannet text-5xl my-20 leading-normal ">
+
+          <h1 className="font-cannet text-center my-20 leading-normal text-xl md:pt-5 md:pt-0 md:text-3xl md:leading-normal lg:text-left lg:text-4xl lg:leading-normal xl:text-5xl xl:leading-normal xl:my-16 xl:w-3/4  ">
             See what's happening
           </h1>
-          <h2 className="text-3xl font-extrabold mb-5">
-            {" "}
+
+          <h2 className="text-2xl text-center font-extrabold mb-5 md:text-4xl lg:text-left">
             Join Zweeper today !
           </h2>
-          <div className="buttons-already w-2/5">
+          <div className="buttons-already w-full px-10 max-[767px]:flex max-[767px]:flex-col max-[767px]:items-center  md:w-7/12 lg:w-3/4 lg:px-0 lg:pt-6 ">
             <button
-              className="button-signUp text-black bg-[#26ff49] hover:bg-[#26ff49]/30 hover:text-white hover:duration-100 rounded-full p-3 my-5 w-full font-semibold"
+              className="button-signUp font-semibold text-black bg-[#26ff49] hover:bg-[#26ff49]/30 hover:text-white hover:duration-100 rounded-full p-3 my-5 w-full max-[500px]:w-full max-[767px]:w-1/2 lg:w-7/12 xl:w-7/12  "
               onClick={() =>
                 document.getElementById("signUp-modal").showModal()
               }
             >
               Sign up
             </button>
-            <p className="font-extrabold">Already have an account ?</p>
+            <p className="font-extrabold text-center text-sm md:text-sm lg:text-left ">
+              Already have an account ?
+            </p>
             <button
-              className="button-signIn hover:bg-gray-500 hover:duration-100 hover:text-white rounded-full border border-gray-500 p-3 my-5 w-full  font-semibold text-[#26ff49]"
+              className="button-signIn hover:bg-gray-500 hover:duration-100 hover:text-white rounded-full border border-gray-500 p-3 my-5 w-full font-semibold text-[#26ff49] max-[500px]:w-full max-[767px]:w-1/2 lg:w-7/12 xl:w-7/12"
               onClick={() =>
                 document.getElementById("signIn-modal").showModal()
               }
