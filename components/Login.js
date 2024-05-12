@@ -261,10 +261,10 @@ function Login() {
                   <path d="M2.679 20.63h1.461l0.327 0.957-1.014 0.476-0.774-1.080z"></path>
                   <path d="M29.304 20.63v0.679l-0.696 0.754-1.032-0.447 0.235-0.974z"></path>
                 </svg>
-                <p className="font-extrabold my-5 text-xl">
+                <p className="font-extrabold my-5 text-xl text-center">
                   Create yout Hackatweet account
                 </p>
-                <div className="Inputs-button w-2/5 flex flex-col gap-3">
+                <div className="Inputs-button max-[415px]:w-3/4 min-[416px]:w-2/5 flex flex-col gap-3">
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -329,10 +329,10 @@ function Login() {
                   <path d="M2.679 20.63h1.461l0.327 0.957-1.014 0.476-0.774-1.080z"></path>
                   <path d="M29.304 20.63v0.679l-0.696 0.754-1.032-0.447 0.235-0.974z"></path>
                 </svg>
-                <p className="font-extrabold my-5 text-xl">
+                <p className="font-extrabold my-5 text-xl text-center">
                   Connect to Hackatweet
                 </p>
-                <div className="Inputs-button w-2/5 flex flex-col gap-3">
+                <div className="Inputs-button max-[415px]:w-3/4 min-[416px]:w-2/5 flex flex-col gap-3">
                   <input
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
